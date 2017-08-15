@@ -60,5 +60,5 @@ class BoostPythonConan(ConanFile):
         self.copy(pattern="*", dst="lib", src="stage/lib")
 
     def package_info(self):
-        self.user_info.lib_short_names = self.lib_short_names
+        self.user_info.lib_short_names = (",").join(self.lib_short_names)
         self.cpp_info.libs = self.collect_libs()
