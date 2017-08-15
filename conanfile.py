@@ -54,8 +54,7 @@ class BoostPythonConan(ConanFile):
     def package(self):
         include_dir = os.path.join(self.build_folder, self.lib_short_name, "include")
         self.copy(pattern="*", dst="include", src=include_dir)
-        lib_dir = os.path.join(self.build_folder, "stage/lib")
-        self.copy(pattern="*", dst="lib", src=lib_dir)
+        self.copy(pattern="*", dst="lib", src="stage/lib")
 
     def package_info(self):
         self.cpp_info.libs = self.collect_libs()
