@@ -10,6 +10,8 @@ class BoostPythonConan(ConanFile):
     description = "Please visit http://www.boost.org/doc/libs/1_64_0/libs/libraries.htm"
     license = "www.boost.org/users/license.html"
     lib_short_names = ["python"]
+    source_only_deps = ["graph", "multi_index", "parameter","property_map",
+        "serialization", "unordered"]
     build_requires = "Boost.Generator/0.0.1@bincrafters/testing" 
     requires =  "Boost.Bind/1.64.0@bincrafters/testing", \
                       "Boost.Config/1.64.0@bincrafters/testing", \
@@ -32,7 +34,7 @@ class BoostPythonConan(ConanFile):
                       #bind3 config0 conversion5 core2 detail5 foreach8 function5 iterator5 lexical_cast8 mpl5 numeric~conversion6 preprocessor0 smart_ptr4 static_assert1 tuple4 type_traits3 utility5
 
     def source(self):
-        for lib_short_name in self.lib_short_names:
+        for lib_short_name in self.lib_short_names + self.source_only_deps:
             self.run("git clone --depth=50 --branch=boost-{0} https://github.com/boostorg/{1}.git"
                      .format(self.version, lib_short_name)) 
 
@@ -50,7 +52,8 @@ class BoostPythonConan(ConanFile):
 
         b2_toolset = toolsets[str(self.settings.compiler)]
         
-        self.run(b2_full_path + " -j4 -a --hash=yes toolset=" + b2_toolset)
+        self.run(b2_full_path + " -j4 -a --hash=yes toolset=" + b2_toolset
+            + ' ' + ' '.join('include=' + dep + '/include' for dep in self.source_only_deps))
         
     def package(self):
         for lib_short_name in self.lib_short_names:
