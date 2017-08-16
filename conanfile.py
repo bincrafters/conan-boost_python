@@ -46,7 +46,7 @@ class BoostPythonConan(ConanFile):
           'gcc': 'gcc',
           'Visual Studio': 'msvc',
           'clang': 'clang',
-          'apple-clang': 'darwin'}
+          'apple-clang': 'clang'}
 
         b2_toolset = toolsets[str(self.settings.compiler)]
         
