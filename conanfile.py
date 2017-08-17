@@ -41,16 +41,8 @@ class BoostPythonConan(ConanFile):
         b2_bin_name = "b2.exe" if self.settings.os == "Windows" else "b2"
         b2_bin_dir_name = boost_build.bindirs[0]
         b2_full_path = os.path.join(boost_build.rootpath, b2_bin_dir_name, b2_bin_name)
-
-        toolsets = {
-          'gcc': 'gcc',
-          'Visual Studio': 'msvc',
-          'clang': 'clang',
-          'apple-clang': 'clang'}
-
-        b2_toolset = toolsets[str(self.settings.compiler)]
         
-        self.run(b2_full_path + " -j4 -a --hash=yes toolset=" + b2_toolset)
+        self.run(b2_full_path + " -j4 -a --hash=yes")
         
     def package(self):
         for lib_short_name in self.lib_short_names:
