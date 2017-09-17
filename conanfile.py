@@ -14,7 +14,7 @@ class BoostPythonConan(ConanFile):
     default_options = "shared=False", "python=python"
     source_only_deps = ["graph", "multi_index", "parameter","property_map",
         "serialization", "unordered"]
-    build_requires = "Boost.Generator/0.0.1@bincrafters/testing" 
+    build_requires = "Boost.Generator/1.64.0@bincrafters/testing" 
     requires =  "Boost.Bind/1.64.0@bincrafters/testing", \
                       "Boost.Config/1.64.0@bincrafters/testing", \
                       "Boost.Conversion/1.64.0@bincrafters/testing", \
