@@ -8,14 +8,14 @@ The packages generated with this **conanfile** can be found in [Bintray](https:/
 
 ### Basic setup
 
-    $ conan install Boost.Python/1.64.0@bincrafters/testing
+    $ conan install Boost.Python/1.65.1@bincrafters/testing
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    Boost.Python/1.64.0@bincrafters/testing
+    Boost.Python/1.65.1@bincrafters/testing
 
     [generators]
     txt
@@ -44,7 +44,7 @@ This is a header only library, so nothing needs to be built.
 
 ## Upload
 
-    $ conan upload Boost.Python/1.64.0@bincrafters/testing --all -r bincrafters
+    $ conan upload Boost.Python/1.65.1@bincrafters/testing --all -r bincrafters
 
 ### License
 [Boost](LICENSE)
