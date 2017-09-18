@@ -33,7 +33,7 @@
 __pycache__
 init.bat
 upload.bat
-build*
+build*/
 bin*
 .vs
 .vscode*
