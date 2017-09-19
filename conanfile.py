@@ -14,24 +14,24 @@ class BoostPythonConan(ConanFile):
     default_options = "shared=False", "python=python"
     source_only_deps = ["graph", "multi_index", "parameter","property_map",
         "serialization", "unordered"]
-    build_requires = "Boost.Generator/1.65.1@bincrafters/testing" 
-    requires =  "Boost.Bind/1.65.1@bincrafters/testing", \
-                      "Boost.Config/1.65.1@bincrafters/testing", \
-                      "Boost.Conversion/1.65.1@bincrafters/testing", \
-                      "Boost.Core/1.65.1@bincrafters/testing", \
-                      "Boost.Detail/1.65.1@bincrafters/testing", \
-                      "Boost.Foreach/1.65.1@bincrafters/testing", \
-                      "Boost.Function/1.65.1@bincrafters/testing", \
-                      "Boost.Iterator/1.65.1@bincrafters/testing", \
-                      "Boost.Lexical_Cast/1.65.1@bincrafters/testing", \
-                      "Boost.Mpl/1.65.1@bincrafters/testing", \
-                      "Boost.Numeric_Conversion/1.65.1@bincrafters/testing", \
-                      "Boost.Preprocessor/1.65.1@bincrafters/testing", \
-                      "Boost.Smart_Ptr/1.65.1@bincrafters/testing", \
-                      "Boost.Static_Assert/1.65.1@bincrafters/testing", \
-                      "Boost.Tuple/1.65.1@bincrafters/testing", \
-                      "Boost.Type_Traits/1.65.1@bincrafters/testing", \
-                      "Boost.Utility/1.65.1@bincrafters/testing"
+    build_requires = "Boost.Generator/1.65.1@bincrafters/stable" 
+    requires =  "Boost.Bind/1.65.1@bincrafters/stable", \
+                      "Boost.Config/1.65.1@bincrafters/stable", \
+                      "Boost.Conversion/1.65.1@bincrafters/stable", \
+                      "Boost.Core/1.65.1@bincrafters/stable", \
+                      "Boost.Detail/1.65.1@bincrafters/stable", \
+                      "Boost.Foreach/1.65.1@bincrafters/stable", \
+                      "Boost.Function/1.65.1@bincrafters/stable", \
+                      "Boost.Iterator/1.65.1@bincrafters/stable", \
+                      "Boost.Lexical_Cast/1.65.1@bincrafters/stable", \
+                      "Boost.Mpl/1.65.1@bincrafters/stable", \
+                      "Boost.Numeric_Conversion/1.65.1@bincrafters/stable", \
+                      "Boost.Preprocessor/1.65.1@bincrafters/stable", \
+                      "Boost.Smart_Ptr/1.65.1@bincrafters/stable", \
+                      "Boost.Static_Assert/1.65.1@bincrafters/stable", \
+                      "Boost.Tuple/1.65.1@bincrafters/stable", \
+                      "Boost.Type_Traits/1.65.1@bincrafters/stable", \
+                      "Boost.Utility/1.65.1@bincrafters/stable"
 
                       #bind3 config0 conversion5 core2 detail5 foreach8 function5 iterator5 lexical_cast8 mpl5 numeric~conversion6 preprocessor0 smart_ptr4 static_assert1 tuple4 type_traits3 utility5
 
