@@ -4,7 +4,6 @@ environment:
     PYTHON: "C:\\Python27"
     PYTHON_VERSION: "2.7.8"
     PYTHON_ARCH: "32"
-    VS140COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2015\\Community\\Common7\\Tools\\"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
