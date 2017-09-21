@@ -9,7 +9,7 @@ class BoostPythonConan(ConanFile):
     url = "https://github.com/bincrafters/conan-boost-python"
     description = "Please visit http://www.boost.org/doc/libs/1_65_1/libs/libraries.htm"
     license = "www.boost.org/users/license.html"
-    lib_short_names = [tools.pythonpath()]
+    lib_short_names = ["python"]
     options = {"shared": [True, False], "python": "ANY"}
     default_options = "shared=False", "python=python"
     source_only_deps = ["graph", "multi_index", "parameter","property_map",
