@@ -1,7 +1,8 @@
 linux: &linux
    os: linux
    sudo: required
-   language: generic
+   language: python
+   python: "3.6"
    services:
      - docker
 osx: &osx
