@@ -21,6 +21,7 @@ if __name__ == "__main__":
         os.environ["CONAN_CHANNEL"] = channel
         os.environ["CONAN_REFERENCE"] = "{0}/{1}".format(name, version)
         os.environ["CONAN_UPLOAD"]="https://api.bintray.com/conan/{0}/public-conan".format(username)
+        os.environ["CONAN_REMOTES"]="https://api.bintray.com/conan/{0}/public-conan".format(username)
 
     builder = ConanMultiPackager()
     builder.add_common_builds()    
