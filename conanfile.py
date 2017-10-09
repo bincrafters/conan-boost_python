@@ -34,6 +34,15 @@ class BoostPythonConan(ConanFile):
 
                       #bind3 config0 conversion5 core2 detail5 foreach8 function5 iterator5 lexical_cast8 mpl5 numeric~conversion6 preprocessor0 smart_ptr4 static_assert1 tuple4 type_traits3 utility5
 
+    def _is_amd64_to_i386(self):
+        return self.settings.arch == "x86" and tools.detected_architecture() == "x86_64"
+        
+    def system_requirements(self):
+        if self.settings.os == "Linux":
+            arch = ":i386" if self._is_amd64_to_i386() else ""
+            package_tool = tools.SystemPackageTool()
+            package_tool.install("python-dev%s" % arch)
+            
     def source(self):
         boostorg_github = "https://github.com/boostorg"
         archive_name = "boost-" + self.version
