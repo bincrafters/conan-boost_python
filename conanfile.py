@@ -1,4 +1,5 @@
-from conans import ConanFile, tools, os
+from conans import ConanFile, tools
+import os
 
 class BoostPythonConan(ConanFile):
     name = "Boost.Python"
