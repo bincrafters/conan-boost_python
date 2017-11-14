@@ -1,5 +1,6 @@
 from conans import ConanFile, tools
 import os
+from io import StringIO
 
 class BoostPythonConan(ConanFile):
     name = "Boost.Python"
@@ -66,15 +67,49 @@ class BoostPythonConan(ConanFile):
         self.user_info.lib_short_names = ",".join(self.lib_short_names)
         self.cpp_info.libs = tools.collect_libs(self)
         self.cpp_info.defines.append("BOOST_ALL_NO_LIB=1")
+        self.cpp_info.includedirs.append(self.python_include)
+        self.cpp_info.libdirs.append(os.path.dirname(self.python_lib))
+        self.cpp_info.libs.append(os.path.basename(self.python_lib))
+    
+    @property
+    def python_exec(self):
+        try:
+            pyexec = str(self.options.python)
+            output = StringIO()
+            self.run('{0} -c "import sys; print(sys.executable)"'.format(pyexec), output=output)
+            return output.getvalue().strip().replace("\\","/")
+        except:
+            return ""
+
+    @property
+    def python_include(self):
+        pyinclude = self.get_python_path("include")
+        if not os.path.exists(os.path.join(pyinclude, 'pyconfig.h')):
+            return ""
+        else:
+            return pyinclude.replace('\\', '/')
+
+    @property
+    def python_version(self):
+        cmd = "from sys import *; print('%d.%d' % (version_info[0],version_info[1]))"
+        return self.run_python_command(cmd)
+
+    @property
+    def python_lib(self):
+        return self.get_python_path("stdlib").replace('\\', '/')
+
+    def get_python_path(self, dir_name):
+        cmd = "import sysconfig; print(sysconfig.get_path('{0}'))".format(dir_name)
+        return self.run_python_command(cmd)
+
+    def run_python_command(self, cmd):
+        pyexec = self.python_exec
+        if pyexec:
+            output = StringIO()
+            self.run('{0} -c "{1}"'.format(pyexec, cmd), output=output)
+            return output.getvalue().strip()
+        else:
+            return ""
 
     def package_id(self):
-        class get_pyver():
-            def __init__(self):
-                self.value = ""
-            def write(self,m):
-                self.value = self.value+m.strip()
-        pyver = get_pyver()
-        self.run(
-            '''{0} -c "from sys import *; print('%d.%d' % (version_info[0],version_info[1]))"'''.format(self.info.options.python),
-            output=pyver)
-        self.info.options.python = "python-"+pyver.value
+        self.info.options.python = "python-"+self.python_version
