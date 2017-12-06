@@ -6,16 +6,13 @@ from io import StringIO
 class BoostPythonConan(ConanFile):
     name = "Boost.Python"
     version = "1.65.1"
-    url = "https://github.com/bincrafters/conan-boost-python"
-    description = "Please visit http://www.boost.org/doc/libs/1_65_1/libs/libraries.htm"
-    license = "www.boost.org/users/license.html"
 
-    settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False], "python": "ANY"}
     default_options = "shared=False", "python=python"
 
     source_only_deps = ["graph", "multi_index", "parameter", "property_map", "serialization", "unordered"]
     requires = \
+        "Boost.Generator/1.65.1@bincrafters/testing", \
         "Boost.Bind/1.65.1@bincrafters/testing", \
         "Boost.Config/1.65.1@bincrafters/testing", \
         "Boost.Conversion/1.65.1@bincrafters/testing", \
@@ -96,16 +93,19 @@ class BoostPythonConan(ConanFile):
 
     # BEGIN
 
+    url = "https://github.com/bincrafters/conan-boost-python"
+    description = "Please visit http://www.boost.org/doc/libs/1_65_1"
+    license = "www.boost.org/users/license.html"
     short_paths = True
     build_requires = "Boost.Generator/1.65.1@bincrafters/testing"
     generators = "boost"
+    settings = "os", "arch", "compiler", "build_type"
 
-    # pylint: disable=unused-import
     @property
     def env(self):
         try:
             with tools.pythonpath(super(self.__class__, self)):
-                import boostgenerator # pylint: disable=F0401
+                import boostgenerator  # pylint: disable=F0401
                 boostgenerator.BoostConanFile(self)
         except:
             pass
