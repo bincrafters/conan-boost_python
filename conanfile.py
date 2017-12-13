@@ -1,5 +1,4 @@
-from conans import ConanFile, tools
-import os
+from conans import ConanFile
 from io import StringIO
 
 
@@ -12,7 +11,6 @@ class BoostPythonConan(ConanFile):
 
     source_only_deps = ["graph", "multi_index", "parameter", "property_map", "serialization", "unordered"]
     requires = \
-        "Boost.Generator/1.65.1@bincrafters/testing", \
         "Boost.Bind/1.65.1@bincrafters/testing", \
         "Boost.Config/1.65.1@bincrafters/testing", \
         "Boost.Conversion/1.65.1@bincrafters/testing", \
@@ -35,19 +33,22 @@ class BoostPythonConan(ConanFile):
     is_header_only = False
 
     def package_info_after(self):
+        import os.path
         self.cpp_info.includedirs.append(self.python_include)
         self.cpp_info.libdirs.append(os.path.dirname(self.python_lib))
         self.cpp_info.libs.append(os.path.basename(self.python_lib))
 
-    def package_id(self):
+    def package_id_after(self):
         self.info.options.python = "python-" + self.python_version
 
     def _is_amd64_to_i386(self):
+        from conans import tools
         return self.settings.arch == "x86" and tools.detected_architecture() == "x86_64"
 
     def system_requirements(self):
         if self.settings.os == "Linux":
             arch = ":i386" if self._is_amd64_to_i386() else ""
+            from conans import tools
             package_tool = tools.SystemPackageTool()
             package_tool.install("python-dev%s" % arch)
     
@@ -63,6 +64,7 @@ class BoostPythonConan(ConanFile):
 
     @property
     def python_include(self):
+        import os.path
         pyinclude = self.get_python_path("include")
         if not os.path.exists(os.path.join(pyinclude, 'pyconfig.h')):
             return ""
@@ -96,19 +98,38 @@ class BoostPythonConan(ConanFile):
     url = "https://github.com/bincrafters/conan-boost-python"
     description = "Please visit http://www.boost.org/doc/libs/1_65_1"
     license = "www.boost.org/users/license.html"
-    short_paths = True
     build_requires = "Boost.Generator/1.65.1@bincrafters/testing"
+    short_paths = True
     generators = "boost"
     settings = "os", "arch", "compiler", "build_type"
+    exports = "boostgenerator.py"
 
+    def package_id(self):
+        getattr(self, "package_id_after", lambda:None)()
+    def source(self):
+        self.call_patch("source")
+    def build(self):
+        self.call_patch("build")
+    def package(self):
+        self.call_patch("package")
+    def package_info(self):
+        self.call_patch("package_info")
+    def call_patch(self, method, *args):
+        if not hasattr(self, '__boost_conan_file__'):
+            try:
+                from conans import tools
+                with tools.pythonpath(self):
+                    import boostgenerator  # pylint: disable=F0401
+                    boostgenerator.BoostConanFile(self)
+            except Exception as e:
+                self.output.error("Failed to import boostgenerator for: "+str(self)+" @ "+method.upper())
+                raise e
+        return getattr(self, method, lambda:None)(*args)
     @property
     def env(self):
-        try:
-            with tools.pythonpath(super(self.__class__, self)):
-                import boostgenerator  # pylint: disable=F0401
-                boostgenerator.BoostConanFile(self)
-        except:
-            pass
-        return super(self.__class__, self).env
+        import os.path
+        result = super(self.__class__, self).env
+        result['PYTHONPATH'] = [os.path.dirname(__file__)] + result.get('PYTHONPATH',[])
+        return result
 
     # END
