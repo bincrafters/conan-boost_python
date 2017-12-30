@@ -1,28 +1,38 @@
-from conan.packager import ConanMultiPackager, os, re
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from conan.packager import ConanMultiPackager
+from conans import tools
+import importlib
+import os
+
+
+def get_module_location():
+    repo = os.getenv("CONAN_MODULE_REPO", "https://raw.githubusercontent.com/bincrafters/conan-templates")
+    branch = os.getenv("CONAN_MODULE_BRANCH", "package_tools_modules")
+    return repo + "/" + branch
+
+    
+def get_module_name():
+    return os.getenv("CONAN_MODULE_NAME", "build_template_default")
+
+    
+def get_module_filename():
+    return get_module_name() + ".py"
+    
+    
+def get_module_url():
+    return get_module_location() + "/" + get_module_filename()
 
     
 if __name__ == "__main__":
-    reponame_a = os.getenv("APPVEYOR_REPO_NAME","")
-    repobranch_a = os.getenv("APPVEYOR_REPO_BRANCH","")
-
-    reponame_t = os.getenv("TRAVIS_REPO_SLUG","")
-    repobranch_t = os.getenv("TRAVIS_BRANCH","")
-
-    if reponame_t or reponame_a:
-        username, repo = reponame_a.split("/") if reponame_a else reponame_t.split("/")
-        channel, version = repobranch_a.split("/") if repobranch_a else repobranch_t.split("/")
-        
-        with open("conanfile.py", "r") as conanfile:
-            contents = conanfile.read()
-            name = re.search(r'name\s*=\s*"(\S*)"', contents).groups()[0]
-            version = re.search(r'version\s*=\s*"(\S*)"', contents).groups()[0]
-        
-        os.environ["CONAN_USERNAME"] = username
-        os.environ["CONAN_CHANNEL"] = channel
-        os.environ["CONAN_REFERENCE"] = "{0}/{1}".format(name, version)
-        os.environ["CONAN_UPLOAD"]="https://api.bintray.com/conan/{0}/public-conan".format(username)
-        os.environ["CONAN_REMOTES"]="https://api.bintray.com/conan/{0}/public-conan".format(username)
-
-    builder = ConanMultiPackager()
-    builder.add_common_builds()    
+    
+    tools.download(get_module_url(), get_module_filename(), overwrite=True)
+    
+    module = importlib.import_module(get_module_name())
+    
+    builder = module.get_builder()
+    
     builder.run()
+
+    

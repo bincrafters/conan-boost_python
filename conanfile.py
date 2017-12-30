@@ -1,54 +1,60 @@
-from conans import ConanFile
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from conans import ConanFile, tools
 from io import StringIO
+import os
 
 
 class BoostPythonConan(ConanFile):
-    name = "Boost.Python"
+    name = "boost_python"
     version = "1.66.0"
-
+    url = "https://github.com/bincrafters/conan-boost-python"
+    
+    lib_short_names = ["python"]
+    is_header_only = False
+    
     options = {"shared": [True, False], "python": "ANY"}
     default_options = "shared=False", "python=python"
 
-    source_only_deps = ["graph", "multi_index", "parameter", "property_map", "serialization", "unordered"]
-    requires = \
-        "Boost.Bind/1.66.0@bincrafters/testing", \
-        "Boost.Config/1.66.0@bincrafters/testing", \
-        "Boost.Conversion/1.66.0@bincrafters/testing", \
-        "Boost.Core/1.66.0@bincrafters/testing", \
-        "Boost.Detail/1.66.0@bincrafters/testing", \
-        "Boost.Foreach/1.66.0@bincrafters/testing", \
-        "Boost.Function/1.66.0@bincrafters/testing", \
-        "Boost.Iterator/1.66.0@bincrafters/testing", \
-        "Boost.Lexical_Cast/1.66.0@bincrafters/testing", \
-        "Boost.Mpl/1.66.0@bincrafters/testing", \
-        "Boost.Numeric_Conversion/1.66.0@bincrafters/testing", \
-        "Boost.Preprocessor/1.66.0@bincrafters/testing", \
-        "Boost.Smart_Ptr/1.66.0@bincrafters/testing", \
-        "Boost.Static_Assert/1.66.0@bincrafters/testing", \
-        "Boost.Tuple/1.66.0@bincrafters/testing", \
-        "Boost.Type_Traits/1.66.0@bincrafters/testing", \
-        "Boost.Utility/1.66.0@bincrafters/testing"
-
-    lib_short_names = ["python"]
-    is_header_only = False
+    source_only_deps = ["graph", "multi_index", "parameter", 
+    "property_map", "serialization", "unordered"]
+    
+    requires = (
+        "boost_package_tools/1.66.0@bincrafters/testing",
+        "boost_bind/1.66.0@bincrafters/testing",
+        "boost_config/1.66.0@bincrafters/testing",
+        "boost_conversion/1.66.0@bincrafters/testing",
+        "boost_core/1.66.0@bincrafters/testing",
+        "boost_detail/1.66.0@bincrafters/testing",
+        "boost_foreach/1.66.0@bincrafters/testing",
+        "boost_function/1.66.0@bincrafters/testing",
+        "boost_iterator/1.66.0@bincrafters/testing",
+        "boost_lexical_cast/1.66.0@bincrafters/testing",
+        "boost_mpl/1.66.0@bincrafters/testing",
+        "boost_numeric_conversion/1.66.0@bincrafters/testing",
+        "boost_preprocessor/1.66.0@bincrafters/testing",
+        "boost_smart_ptr/1.66.0@bincrafters/testing",
+        "boost_static_assert/1.66.0@bincrafters/testing",
+        "boost_tuple/1.66.0@bincrafters/testing",
+        "boost_type_traits/1.66.0@bincrafters/testing",
+        "boost_utility/1.66.0@bincrafters/testing"
+    )
 
     def package_info_after(self):
-        import os.path
         self.cpp_info.includedirs.append(self.python_include)
         self.cpp_info.libdirs.append(os.path.dirname(self.python_lib))
         self.cpp_info.libs.append(os.path.basename(self.python_lib))
 
-    def package_id_after(self):
+    def package_id_additional(self):
         self.info.options.python = "python-" + self.python_version
 
     def _is_amd64_to_i386(self):
-        from conans import tools
         return self.settings.arch == "x86" and tools.detected_architecture() == "x86_64"
 
     def system_requirements(self):
         if self.settings.os == "Linux":
             arch = ":i386" if self._is_amd64_to_i386() else ""
-            from conans import tools
             package_tool = tools.SystemPackageTool()
             package_tool.install("python-dev%s" % arch)
     
@@ -64,7 +70,6 @@ class BoostPythonConan(ConanFile):
 
     @property
     def python_include(self):
-        import os.path
         pyinclude = self.get_python_path("include")
         if not os.path.exists(os.path.join(pyinclude, 'pyconfig.h')):
             return ""
@@ -95,44 +100,40 @@ class BoostPythonConan(ConanFile):
 
     # BEGIN
 
-    url = "https://github.com/bincrafters/conan-boost-python"
     description = "Please visit http://www.boost.org/doc/libs/1_66_0"
-    license = "www.boost.org/users/license.html"
-    build_requires = "Boost.Generator/1.66.0@bincrafters/testing"
+    license = "BSL-1.0"
     short_paths = True
     generators = "boost"
     settings = "os", "arch", "compiler", "build_type"
-    exports = "boostgenerator.py"
+    build_requires = "boost_generator/1.66.0@bincrafters/testing"
 
     def package_id(self):
-        getattr(self, "package_id_after", lambda:None)()
+        getattr(self, "package_id_additional", lambda:None)()
+
     def source(self):
-        self.call_patch("source")
+        with tools.pythonpath(self):
+            import boost_package_tools  # pylint: disable=F0401
+            boost_package_tools.source(self)
+        getattr(self, "source_additional", lambda:None)()
+
     def build(self):
-        self.call_patch("build")
+        with tools.pythonpath(self):
+            import boost_package_tools  # pylint: disable=F0401
+            boost_package_tools.build(self)
+        getattr(self, "build_additional", lambda:None)()
+
     def package(self):
-        self.call_patch("package")
+        with tools.pythonpath(self):
+            import boost_package_tools  # pylint: disable=F0401
+            boost_package_tools.package(self)
+        getattr(self, "package_additional", lambda:None)()
+
     def package_info(self):
-        self.call_patch("package_info")
-    def call_patch(self, method, *args):
-        if not hasattr(self, '__boost_conan_file__'):
-            try:
-                from conans import tools
-                with tools.pythonpath(self):
-                    import boostgenerator  # pylint: disable=F0401
-                    boostgenerator.BoostConanFile(self)
-            except Exception as e:
-                self.output.error("Failed to import boostgenerator for: "+str(self)+" @ "+method.upper())
-                raise e
-        return getattr(self, method, lambda:None)(*args)
-    @property
-    def env(self):
-        import os.path
-        result = super(self.__class__, self).env
-        result['PYTHONPATH'] = [os.path.dirname(__file__)] + result.get('PYTHONPATH',[])
-        return result
-    @property
-    def build_policy_missing(self):
-        return (getattr(self, 'is_in_cycle_group', False) and not getattr(self, 'is_header_only', True)) or super(self.__class__, self).build_policy_missing
+        with tools.pythonpath(self):
+            import boost_package_tools  # pylint: disable=F0401
+            boost_package_tools.package_info(self)
+        getattr(self, "package_info_additional", lambda:None)()
+
+
 
     # END
