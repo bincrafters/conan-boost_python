@@ -9,7 +9,7 @@ import os
 class BoostPythonConan(ConanFile):
     name = "boost_python"
     version = "1.66.0"
-    url = "https://github.com/bincrafters/conan-boost-python"
+    url = "https://github.com/bincrafters/conan-boost_python"
     
     lib_short_names = ["python"]
     is_header_only = False
