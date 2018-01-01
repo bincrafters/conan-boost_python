@@ -41,7 +41,7 @@ class BoostPythonConan(ConanFile):
         "boost_utility/1.66.0@bincrafters/testing"
     )
 
-    def package_info_after(self):
+    def package_info_additional(self):
         self.cpp_info.includedirs.append(self.python_include)
         self.cpp_info.libdirs.append(os.path.dirname(self.python_lib))
         self.cpp_info.libs.append(os.path.basename(self.python_lib))
