@@ -10,7 +10,8 @@ class BoostPythonConan(ConanFile):
     name = "boost_python"
     version = "1.66.0"
     url = "https://github.com/bincrafters/conan-boost_python"
-    
+    author = "Bincrafters <bincrafters@gmail.com>"
+    exports = ["LICENSE.md"]
     lib_short_names = ["python"]
     is_header_only = False
     
