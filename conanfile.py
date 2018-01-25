@@ -22,24 +22,24 @@ class BoostPythonConan(ConanFile):
     "property_map", "serialization", "unordered"]
     
     requires = (
-        "boost_package_tools/1.66.0@bincrafters/testing",
-        "boost_bind/1.66.0@bincrafters/testing",
-        "boost_config/1.66.0@bincrafters/testing",
-        "boost_conversion/1.66.0@bincrafters/testing",
-        "boost_core/1.66.0@bincrafters/testing",
-        "boost_detail/1.66.0@bincrafters/testing",
-        "boost_foreach/1.66.0@bincrafters/testing",
-        "boost_function/1.66.0@bincrafters/testing",
-        "boost_iterator/1.66.0@bincrafters/testing",
-        "boost_lexical_cast/1.66.0@bincrafters/testing",
-        "boost_mpl/1.66.0@bincrafters/testing",
-        "boost_numeric_conversion/1.66.0@bincrafters/testing",
-        "boost_preprocessor/1.66.0@bincrafters/testing",
-        "boost_smart_ptr/1.66.0@bincrafters/testing",
-        "boost_static_assert/1.66.0@bincrafters/testing",
-        "boost_tuple/1.66.0@bincrafters/testing",
-        "boost_type_traits/1.66.0@bincrafters/testing",
-        "boost_utility/1.66.0@bincrafters/testing"
+        "boost_package_tools/1.66.0@bincrafters/stable",
+        "boost_bind/1.66.0@bincrafters/stable",
+        "boost_config/1.66.0@bincrafters/stable",
+        "boost_conversion/1.66.0@bincrafters/stable",
+        "boost_core/1.66.0@bincrafters/stable",
+        "boost_detail/1.66.0@bincrafters/stable",
+        "boost_foreach/1.66.0@bincrafters/stable",
+        "boost_function/1.66.0@bincrafters/stable",
+        "boost_iterator/1.66.0@bincrafters/stable",
+        "boost_lexical_cast/1.66.0@bincrafters/stable",
+        "boost_mpl/1.66.0@bincrafters/stable",
+        "boost_numeric_conversion/1.66.0@bincrafters/stable",
+        "boost_preprocessor/1.66.0@bincrafters/stable",
+        "boost_smart_ptr/1.66.0@bincrafters/stable",
+        "boost_static_assert/1.66.0@bincrafters/stable",
+        "boost_tuple/1.66.0@bincrafters/stable",
+        "boost_type_traits/1.66.0@bincrafters/stable",
+        "boost_utility/1.66.0@bincrafters/stable"
     )
 
     def package_info_additional(self):
@@ -106,7 +106,7 @@ class BoostPythonConan(ConanFile):
     short_paths = True
     generators = "boost"
     settings = "os", "arch", "compiler", "build_type"
-    build_requires = "boost_generator/1.66.0@bincrafters/testing"
+    build_requires = "boost_generator/1.66.0@bincrafters/stable"
 
     def package_id(self):
         getattr(self, "package_id_additional", lambda:None)()
