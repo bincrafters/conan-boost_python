@@ -83,8 +83,16 @@ class BoostPythonConan(ConanFile):
         return self.run_python_command(cmd)
 
     @property
+    def python_version_nodot(self):
+        cmd = "from sys import *; print('%d%d' % (version_info[0],version_info[1]))"
+        return self.run_python_command(cmd)
+
+    @property
     def python_lib(self):
-        return self.get_python_path("stdlib").replace('\\', '/')
+        py_stdlib = self.get_python_path("stdlib").replace('\\', '/')
+        if self.settings.os == "Windows":
+            py_stdlib = os.path.join(os.path.dirname(py_stdlib), "libs", "python"+self.python_version_nodot+".lib")
+        return py_stdlib
 
     def get_python_path(self, dir_name):
         cmd = "import sysconfig; print(sysconfig.get_path('{0}'))".format(dir_name)
