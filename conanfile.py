@@ -46,9 +46,13 @@ class BoostPythonConan(ConanFile):
         self.cpp_info.includedirs.append(self.python_include)
         self.cpp_info.libdirs.append(os.path.dirname(self.python_lib))
         self.cpp_info.libs.append(os.path.basename(self.python_lib))
-
+            
     def package_id_additional(self):
         self.info.options.python = "python-" + self.python_version
+
+        boost_deps_only = [dep_name for dep_name in self.info.requires.pkg_names if dep_name.startswith("boost_")]
+        for dep_name in boost_deps_only:
+            self.info.requires[dep_name].full_version_mode()
 
     def _is_amd64_to_i386(self):
         return self.settings.arch == "x86" and tools.detected_architecture() == "x86_64"
