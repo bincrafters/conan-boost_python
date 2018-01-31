@@ -19,11 +19,11 @@ matrix:
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_ARCHS=x86_64 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp sources.list /etc/apt/sources.list'
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_ARCHS=x86 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp sources.list /etc/apt/sources.list'
+        env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39 CONAN_ARCHS=x86 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp travis/sources.list /etc/apt/sources.list'
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_ARCHS=x86_64 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp sources.list /etc/apt/sources.list'
+        env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_ARCHS=x86_64 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp travis/sources.list /etc/apt/sources.list'
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_ARCHS=x86 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp sources.list /etc/apt/sources.list'
+        env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=lasote/conanclang40 CONAN_ARCHS=x86 CONAN_DOCKER_ENTRY_SCRIPT='sudo cp travis/sources.list /etc/apt/sources.list'
 
 install:
   - chmod +x .travis/install.sh
