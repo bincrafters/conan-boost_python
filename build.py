@@ -5,7 +5,7 @@ import os
 from bincrafters import build_shared
 from bincrafters import build_template_boost_default
 
-python_path = os.getenv("CONAN_BOOST_PYTHON_PATH", "")
+python_path = os.getenv("CONAN_BOOST_PYTHON_PATH", "python")
 args = "-o boost_python:python=" + python_path
     
 if __name__ == "__main__":
