@@ -90,7 +90,11 @@ class BoostPythonConan(ConanFile):
     def python_include(self):
         pyinclude = self.get_python_path("include")
         if not os.path.exists(os.path.join(pyinclude, 'pyconfig.h')):
-            return ""
+            pyinclude = self.get_python_var('INCLUDEPY')
+            if not os.path.exists(os.path.join(pyinclude, 'pyconfig.h')):
+                return ""
+            else:
+                return pyinclude.replace('\\', '/')
         else:
             return pyinclude.replace('\\', '/')
 
@@ -113,7 +117,10 @@ class BoostPythonConan(ConanFile):
 
     @property
     def python_bin(self):
-        cmd = "import sysconfig; print(sysconfig.get_config_var('BINDIR'))"
+        return self.get_python_var('BINDIR')
+
+    def get_python_var(self, var_name):
+        cmd = "import sysconfig; print(sysconfig.get_config_var('{0}'))".format(var_name)
         return self.run_python_command(cmd)
 
     def get_python_path(self, dir_name):
