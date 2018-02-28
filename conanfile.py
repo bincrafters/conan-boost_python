@@ -14,13 +14,13 @@ class BoostPythonConan(ConanFile):
     exports = ["LICENSE.md"]
     lib_short_names = ["python"]
     is_header_only = False
-    
+
     options = {"shared": [True, False], "python": "ANY"}
     default_options = "shared=False", "python=python"
 
-    source_only_deps = ["graph", "multi_index", "parameter", 
+    source_only_deps = ["graph", "multi_index", "parameter",
     "property_map", "serialization", "unordered"]
-    
+
     requires = (
         "boost_package_tools/1.66.0@bincrafters/testing",
         "boost_bind/1.66.0@bincrafters/testing",
@@ -51,7 +51,7 @@ class BoostPythonConan(ConanFile):
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
         self.cpp_info.bindirs.append(self.python_bin)
-            
+
     def package_id_additional(self):
         self.info.options.python = "python-" + self.python_version
 
@@ -75,7 +75,7 @@ class BoostPythonConan(ConanFile):
                     arch_suffix = '.x86_64'
                 package_tool = tools.SystemPackageTool()
                 package_tool.install("python-devel%s" % arch_suffix)
-    
+
     @property
     def python_exec(self):
         try:
