@@ -54,14 +54,22 @@ class BoostPythonConan(ConanFile):
         for dep_name in boost_deps_only:
             self.info.requires[dep_name].full_version_mode()
 
-    def _is_amd64_to_i386(self):
-        return self.settings.arch == "x86" and tools.detected_architecture() == "x86_64"
-
     def system_requirements(self):
-        if self.settings.os == "Linux":
-            arch = ":i386" if self._is_amd64_to_i386() else ""
-            package_tool = tools.SystemPackageTool()
-            package_tool.install("python-dev%s" % arch)
+        if self.settings.os == "Linux" and tools.os_info.is_linux:
+            if tools.os_info.with_apt:
+                if self.settings.arch == 'x86':
+                    arch_suffix = ':i386'
+                elif self.settings.arch == 'x86_64':
+                    arch_suffix = ':amd64'
+                package_tool = tools.SystemPackageTool()
+                package_tool.install("python-dev%s" % arch_suffix)
+            elif tools.os_info.with_yum:
+                if self.settings.arch == 'x86':
+                    arch_suffix = '.i686'
+                elif self.settings.arch == 'x86_64':
+                    arch_suffix = '.x86_64'
+                package_tool = tools.SystemPackageTool()
+                package_tool.install("python-devel%s" % arch_suffix)
     
     @property
     def python_exec(self):
