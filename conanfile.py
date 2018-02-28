@@ -50,6 +50,7 @@ class BoostPythonConan(ConanFile):
             self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
+        self.cpp_info.bindirs.append(self.python_bin)
             
     def package_id_additional(self):
         self.info.options.python = "python-" + self.python_version
@@ -109,6 +110,11 @@ class BoostPythonConan(ConanFile):
         if self.settings.os == "Windows":
             py_stdlib = os.path.join(os.path.dirname(py_stdlib), "libs", "python"+self.python_version_nodot+".lib")
         return py_stdlib
+
+    @property
+    def python_bin(self):
+        cmd = "import sysconfig; print(sysconfig.get_config_var('BINDIR'))"
+        return self.run_python_command(cmd)
 
     def get_python_path(self, dir_name):
         cmd = "import sysconfig; print(sysconfig.get_path('{0}'))".format(dir_name)
