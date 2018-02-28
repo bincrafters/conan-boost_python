@@ -46,6 +46,10 @@ class BoostPythonConan(ConanFile):
         self.cpp_info.includedirs.append(self.python_include)
         self.cpp_info.libdirs.append(os.path.dirname(self.python_lib))
         self.cpp_info.libs.append(os.path.basename(self.python_lib))
+        if self.options.shared:
+            self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
+        else:
+            self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
             
     def package_id_additional(self):
         self.info.options.python = "python-" + self.python_version
