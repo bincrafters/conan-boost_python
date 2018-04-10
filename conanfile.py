@@ -6,8 +6,7 @@ from conans import ConanFile, tools
 
 class BoostPythonConan(ConanFile):
     name = "boost_python"
-    version = "1.66.0"
-    url = "https://github.com/bincrafters/conan-boost_python"
+    version = "1.67.0"
     author = "Bincrafters <bincrafters@gmail.com>"
     exports = ["LICENSE.md"]
     lib_short_names = ["python"]
@@ -16,29 +15,36 @@ class BoostPythonConan(ConanFile):
     options = {"shared": [True, False], "python_version": "ANY"}
     default_options = "shared=False"
 
-    source_only_deps = ["graph", "multi_index", "parameter",
-    "property_map", "serialization", "unordered"]
+    source_only_deps = [
+        "graph",
+        "integer",
+        "multi_index",
+        "parameter",
+        "property_map",
+        "serialization",
+        "unordered"
+    ]
 
     requires = (
-        "python_dev_config/0.2@bincrafters/stable",
-        "boost_package_tools/1.66.0@bincrafters/testing",
-        "boost_bind/1.66.0@bincrafters/testing",
-        "boost_config/1.66.0@bincrafters/testing",
-        "boost_conversion/1.66.0@bincrafters/testing",
-        "boost_core/1.66.0@bincrafters/testing",
-        "boost_detail/1.66.0@bincrafters/testing",
-        "boost_foreach/1.66.0@bincrafters/testing",
-        "boost_function/1.66.0@bincrafters/testing",
-        "boost_iterator/1.66.0@bincrafters/testing",
-        "boost_lexical_cast/1.66.0@bincrafters/testing",
-        "boost_mpl/1.66.0@bincrafters/testing",
-        "boost_numeric_conversion/1.66.0@bincrafters/testing",
-        "boost_preprocessor/1.66.0@bincrafters/testing",
-        "boost_smart_ptr/1.66.0@bincrafters/testing",
-        "boost_static_assert/1.66.0@bincrafters/testing",
-        "boost_tuple/1.66.0@bincrafters/testing",
-        "boost_type_traits/1.66.0@bincrafters/testing",
-        "boost_utility/1.66.0@bincrafters/testing"
+        "boost_bind/1.67.0@bincrafters/testing",
+        "boost_config/1.67.0@bincrafters/testing",
+        "boost_conversion/1.67.0@bincrafters/testing",
+        "boost_core/1.67.0@bincrafters/testing",
+        "boost_detail/1.67.0@bincrafters/testing",
+        "boost_foreach/1.67.0@bincrafters/testing",
+        "boost_function/1.67.0@bincrafters/testing",
+        "boost_iterator/1.67.0@bincrafters/testing",
+        "boost_lexical_cast/1.67.0@bincrafters/testing",
+        "boost_mpl/1.67.0@bincrafters/testing",
+        "boost_numeric_conversion/1.67.0@bincrafters/testing",
+        "boost_package_tools/1.67.0@bincrafters/testing",
+        "boost_preprocessor/1.67.0@bincrafters/testing",
+        "boost_smart_ptr/1.67.0@bincrafters/testing",
+        "boost_static_assert/1.67.0@bincrafters/testing",
+        "boost_tuple/1.67.0@bincrafters/testing",
+        "boost_type_traits/1.67.0@bincrafters/testing",
+        "boost_utility/1.67.0@bincrafters/testing",
+        "python_dev_config/0.3@bincrafters/stable"
     )
 
     def package_info_additional(self):
@@ -46,24 +52,28 @@ class BoostPythonConan(ConanFile):
             self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
+            #self.cpp_info.libdirs.extend(self.deps_cpp_info['python_dev_config'].libdirs)
+            #self.cpp_info.libs.extend(self.deps_cpp_info['python_dev_config'].libs)
+            #self.cpp_info.bindirs.extend(self.deps_cpp_info['python_dev_config'].bindirs)
 
     def package_id_additional(self):
         boost_deps_only = [dep_name for dep_name in self.info.requires.pkg_names if dep_name.startswith("boost_")]
         for dep_name in boost_deps_only:
             self.info.requires[dep_name].full_version_mode()
-    
+
     def source_additional(self):
         if self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
             raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
 
     # BEGIN
 
-    description = "Please visit http://www.boost.org/doc/libs/1_66_0"
+    url = "https://github.com/bincrafters/conan-boost_python"
+    description = "Please visit http://www.boost.org/doc/libs/1_67_0"
     license = "BSL-1.0"
     short_paths = True
     generators = "boost"
     settings = "os", "arch", "compiler", "build_type"
-    build_requires = "boost_generator/1.66.0@bincrafters/testing"
+    build_requires = "boost_generator/1.67.0@bincrafters/testing"
 
     def package_id(self):
         getattr(self, "package_id_additional", lambda:None)()
