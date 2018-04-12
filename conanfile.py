@@ -12,7 +12,13 @@ class BoostPythonConan(ConanFile):
     lib_short_names = ["python"]
     is_header_only = False
 
-    options = {"shared": [True, False], "python_version": "ANY"}
+    options = {
+        "shared": [True, False],
+        "python_version": [
+            None,
+            '2.2', '2.3', '2.4', '2.5', '2.6', '2.7',
+            '3.0','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9'
+            ]}
     default_options = "shared=False"
 
     source_only_deps = [
@@ -52,9 +58,6 @@ class BoostPythonConan(ConanFile):
             self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
-            #self.cpp_info.libdirs.extend(self.deps_cpp_info['python_dev_config'].libdirs)
-            #self.cpp_info.libs.extend(self.deps_cpp_info['python_dev_config'].libs)
-            #self.cpp_info.bindirs.extend(self.deps_cpp_info['python_dev_config'].bindirs)
 
     def package_id_additional(self):
         boost_deps_only = [dep_name for dep_name in self.info.requires.pkg_names if dep_name.startswith("boost_")]
@@ -62,8 +65,11 @@ class BoostPythonConan(ConanFile):
             self.info.requires[dep_name].full_version_mode()
 
     def source_additional(self):
-        if self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
-            raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
+        if 'python_version' in self.options:
+            if not self.options.python_version:
+                self.options.python_version = self.deps_user_info['python_dev_config'].python_version
+            elif self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
+                raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
 
     # BEGIN
 
