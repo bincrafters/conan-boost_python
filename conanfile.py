@@ -17,7 +17,7 @@ class BoostPythonConan(ConanFile):
         "python_version": [
             None,
             '2.2', '2.3', '2.4', '2.5', '2.6', '2.7',
-            '3.0','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','3.9'
+            '3.0', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9'
             ]}
     default_options = "shared=False"
 
@@ -50,7 +50,7 @@ class BoostPythonConan(ConanFile):
         "boost_tuple/1.67.0@bincrafters/testing",
         "boost_type_traits/1.67.0@bincrafters/testing",
         "boost_utility/1.67.0@bincrafters/testing",
-        "python_dev_config/0.3@bincrafters/stable"
+        "python_dev_config/0.4@bincrafters/stable"
     )
 
     def package_info_additional(self):
@@ -66,9 +66,7 @@ class BoostPythonConan(ConanFile):
 
     def source_additional(self):
         if 'python_version' in self.options:
-            if not self.options.python_version:
-                self.options.python_version = self.deps_user_info['python_dev_config'].python_version
-            elif self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
+            if self.options.python_version and self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
                 raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
 
     # BEGIN
