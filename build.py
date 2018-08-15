@@ -9,7 +9,7 @@ args = ""
 python_version = os.getenv("CONAN_BOOST_PYTHON_VERSION", None)
 if python_version:
     args += " -o boost_python:python_version=" + python_version
-python_path = os.getenv("CONAN_PYTHON_PATH", "python")
+python_path = os.getenv("CONAN_BOOST_PYTHON_PATH", "python")
 if python_path:
     args += " -o python_dev_config:python=" + python_path
 
