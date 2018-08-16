@@ -18,7 +18,7 @@ if __name__ == "__main__":
     builds_with_updated_options = []
 
     for settings, options, env_vars, build_requires, reference in builder.items:
-         builds_with_options.append([settings, updated_options, env_vars, build_requires])
+         builds_with_updated_options.append([settings, updated_options, env_vars, build_requires])
     
     builder.builds = builds_with_updated_options    
     
