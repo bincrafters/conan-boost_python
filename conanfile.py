@@ -50,6 +50,7 @@ class BoostPythonConan(ConanFile):
         "boost_tuple/1.67.0@bincrafters/testing",
         "boost_type_traits/1.67.0@bincrafters/testing",
         "boost_utility/1.67.0@bincrafters/testing",
+        "python_dev_config/0.4@bincrafters/stable"
     )
 
     def package_info_additional(self):
