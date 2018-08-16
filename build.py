@@ -14,8 +14,6 @@ if __name__ == "__main__":
     
     if python_version:
         args.extend(["-o","boost_python:python_version=" + python_version])
-    if python_path:
-        args.extend(["-o","python_dev_config:python=" + python_path])
     
     builder = build_template_boost_default.get_builder(args=args)
 
