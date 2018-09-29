@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from conans import ConanFile, tools
+from conans import python_requires
 
 
-class BoostPythonConan(ConanFile):
+base = python_requires("boost_base/1.67.0@bincrafters/testing")
+
+class BoostPythonConan(base.BoostBaseConan):
     name = "boost_python"
-    version = "1.67.0"
-    author = "Bincrafters <bincrafters@gmail.com>"
-    exports = ["LICENSE.md"]
+    url = "https://github.com/bincrafters/conan-boost_python"
     lib_short_names = ["python"]
-    is_header_only = False
-
     options = {
         "shared": [True, False],
         "python_version": [
@@ -30,28 +28,26 @@ class BoostPythonConan(ConanFile):
         "serialization",
         "unordered"
     ]
-
-    requires = (
-        "boost_bind/1.67.0@bincrafters/testing",
-        "boost_config/1.67.0@bincrafters/testing",
-        "boost_conversion/1.67.0@bincrafters/testing",
-        "boost_core/1.67.0@bincrafters/testing",
-        "boost_detail/1.67.0@bincrafters/testing",
-        "boost_foreach/1.67.0@bincrafters/testing",
-        "boost_function/1.67.0@bincrafters/testing",
-        "boost_iterator/1.67.0@bincrafters/testing",
-        "boost_lexical_cast/1.67.0@bincrafters/testing",
-        "boost_mpl/1.67.0@bincrafters/testing",
-        "boost_numeric_conversion/1.67.0@bincrafters/testing",
-        "boost_package_tools/1.67.0@bincrafters/testing",
-        "boost_preprocessor/1.67.0@bincrafters/testing",
-        "boost_smart_ptr/1.67.0@bincrafters/testing",
-        "boost_static_assert/1.67.0@bincrafters/testing",
-        "boost_tuple/1.67.0@bincrafters/testing",
-        "boost_type_traits/1.67.0@bincrafters/testing",
-        "boost_utility/1.67.0@bincrafters/testing",
+    b2_requires = [
+        "boost_bind",
+        "boost_config",
+        "boost_conversion",
+        "boost_core",
+        "boost_detail",
+        "boost_foreach",
+        "boost_function",
+        "boost_iterator",
+        "boost_lexical_cast",
+        "boost_mpl",
+        "boost_numeric_conversion",
+        "boost_preprocessor",
+        "boost_smart_ptr",
+        "boost_static_assert",
+        "boost_tuple",
+        "boost_type_traits",
+        "boost_utility",
         "python_dev_config/0.5@bincrafters/stable"
-    )
+    ]
 
     def package_info_additional(self):
         if self.options.shared:
@@ -59,51 +55,8 @@ class BoostPythonConan(ConanFile):
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
 
-    def package_id_additional(self):
-        boost_deps_only = [dep_name for dep_name in self.info.requires.pkg_names if dep_name.startswith("boost_")]
-        for dep_name in boost_deps_only:
-            self.info.requires[dep_name].full_version_mode()
-
     def source_additional(self):
         if 'python_version' in self.options:
             if self.options.python_version and self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
                 raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
 
-    # BEGIN
-
-    url = "https://github.com/bincrafters/conan-boost_python"
-    description = "Please visit http://www.boost.org/doc/libs/1_67_0"
-    license = "BSL-1.0"
-    short_paths = True
-    generators = "boost"
-    settings = "os", "arch", "compiler", "build_type"
-    build_requires = "boost_generator/1.67.0@bincrafters/testing"
-
-    def package_id(self):
-        getattr(self, "package_id_additional", lambda:None)()
-
-    def source(self):
-        with tools.pythonpath(self):
-            import boost_package_tools  # pylint: disable=F0401
-            boost_package_tools.source(self)
-        getattr(self, "source_additional", lambda:None)()
-
-    def build(self):
-        with tools.pythonpath(self):
-            import boost_package_tools  # pylint: disable=F0401
-            boost_package_tools.build(self)
-        getattr(self, "build_additional", lambda:None)()
-
-    def package(self):
-        with tools.pythonpath(self):
-            import boost_package_tools  # pylint: disable=F0401
-            boost_package_tools.package(self)
-        getattr(self, "package_additional", lambda:None)()
-
-    def package_info(self):
-        with tools.pythonpath(self):
-            import boost_package_tools  # pylint: disable=F0401
-            boost_package_tools.package_info(self)
-        getattr(self, "package_info_additional", lambda:None)()
-
-    # END
