@@ -46,8 +46,10 @@ class BoostPythonConan(base.BoostBaseConan):
         "boost_tuple",
         "boost_type_traits",
         "boost_utility",
-        "python_dev_config/0.5@bincrafters/stable"
     ]
+    
+    def requirements_additional(self):
+        self.requires("python_dev_config/0.5@bincrafters/stable")
 
     def package_info_additional(self):
         if self.options.shared:
