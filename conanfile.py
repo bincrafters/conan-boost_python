@@ -51,14 +51,18 @@ class BoostPythonConan(base.BoostBaseConan):
     def requirements_additional(self):
         self.requires("python_dev_config/0.5@bincrafters/stable")
 
+    def source_additional(self):
+        if 'python_version' in self.options:
+            if self.options.python_version and self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
+                raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
+            
     def package_info_additional(self):
         if self.options.shared:
             self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
-
-    def source_additional(self):
-        if 'python_version' in self.options:
-            if self.options.python_version and self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
-                raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
+            
+    def package_id_additional(self):
+        self.info.options.python = "python-" + self.python_version
+            
 
