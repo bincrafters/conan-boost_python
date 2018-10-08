@@ -63,6 +63,6 @@ class BoostPythonConan(base.BoostBaseConan):
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
             
     def package_id_additional(self):
-        self.info.options.python = "python-" + str(self.options.python_version)
+        self.info.options.python_version = "python-" + str(self.options.python_version)
             
 
