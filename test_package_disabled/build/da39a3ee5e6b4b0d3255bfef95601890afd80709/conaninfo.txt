@@ -1,0 +1,55 @@
+[settings]
+    arch=x86_64
+    build_type=Release
+    compiler=Visual Studio
+    compiler.runtime=MD
+    compiler.version=15
+    os=Windows
+
+[requires]
+    Boost.Python/1.Y.Z
+
+[options]
+
+
+[full_settings]
+    arch=x86_64
+    build_type=Release
+    compiler=Visual Studio
+    compiler.runtime=MD
+    compiler.version=15
+    os=Windows
+
+[full_requires]
+    Boost.Bind/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Config/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Conversion/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Core/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Detail/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Foreach/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Function/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Iterator/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Level5Group/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Lexical_Cast/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Mpl/1.64.0@bincrafters/testing:eb9c161ab70566ac811cce24cb59fbb8226e821c
+    Boost.Numeric_Conversion/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Preprocessor/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Python/1.64.0@bincrafters/testing:75491e06859329155922e3f3225d50505e3d85c3
+    Boost.Smart_Ptr/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Static_Assert/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Tuple/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Type_Traits/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+    Boost.Utility/1.64.0@bincrafters/testing:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
+
+[full_options]
+    Boost.Python:python=python
+    Boost.Python:shared=False
+
+[scope]
+    dev=True
+
+[recipe_hash]
+
+
+[env]
+
