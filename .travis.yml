@@ -8,6 +8,9 @@ linux: &linux
 osx: &osx
    os: osx
    language: generic
+env:
+  - DOCKER_IMAGE_SKIP_UPDATE: True
+  
 matrix:
    include:
       - <<: *linux
