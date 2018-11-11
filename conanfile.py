@@ -51,7 +51,7 @@ class BoostPythonConan(base.BoostBaseConan):
     def requirements_additional(self):
         self.requires("python_dev_config/0.5@bincrafters/stable")
 
-    def configure_additional(self):
+    def config_options_additional(self):
         if 'python_version' in self.options:
             if self.options.python_version and self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
                 raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
