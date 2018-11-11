@@ -14,12 +14,5 @@ if __name__ == "__main__":
     }
     
     builder = build_template_boost_default.get_builder()
-
-    builds_with_updated_options = []
-
-    for settings, options, env_vars, build_requires, reference in builder.items:
-         builds_with_updated_options.append([settings, updated_options, env_vars, build_requires])
-    
-    builder.builds = builds_with_updated_options    
     
     builder.run()

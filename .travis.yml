@@ -11,56 +11,56 @@ osx: &osx
 matrix:
    include:
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=4.9 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc49
-        python: 3.7-dev
+        env: CONAN_GCC_VERSIONS=4.9 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc49 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=5 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc5
-        python: 3.7-dev
+        env: CONAN_GCC_VERSIONS=5 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc5 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=6 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc6
-        python: 3.7-dev
+        env: CONAN_GCC_VERSIONS=6 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc6 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=7 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc7
-        python: 3.7-dev
+        env: CONAN_GCC_VERSIONS=7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc7 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=8 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc8
-        python: 3.7-dev
+        env: CONAN_GCC_VERSIONS=8 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/gcc8 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=3.9 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang39
-        python: 3.7-dev
+        env: CONAN_CLANG_VERSIONS=3.9 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang39 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=4.0 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang40
-        python: 3.7-dev
+        env: CONAN_CLANG_VERSIONS=4.0 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang40 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=5.0 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang50
-        python: 3.7-dev
+        env: CONAN_CLANG_VERSIONS=5.0 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang50 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=6.0 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang60
-        python: 3.7-dev
+        env: CONAN_CLANG_VERSIONS=6.0 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang60 CONAN_OPTIONS=boost_python:python_version=3.6
+        python: 3.6
       - <<: *osx
         osx_image: xcode8.3
-        env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 PYENV_VERSION=2.7.14 
+        env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
         osx_image: xcode8.3
-        env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 PYENV_VERSION=2.7.14 
+        env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
         osx_image: xcode9
-        env: CONAN_APPLE_CLANG_VERSIONS=9.0 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64
+        env: CONAN_APPLE_CLANG_VERSIONS=9.0 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6 
       - <<: *osx
         osx_image: xcode9
-        env: CONAN_APPLE_CLANG_VERSIONS=9.0 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64
+        env: CONAN_APPLE_CLANG_VERSIONS=9.0 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
         osx_image: xcode9.4
-        env: CONAN_APPLE_CLANG_VERSIONS=9.1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 
+        env: CONAN_APPLE_CLANG_VERSIONS=9.1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
         osx_image: xcode9.4
-        env: CONAN_APPLE_CLANG_VERSIONS=9.1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64
+        env: CONAN_APPLE_CLANG_VERSIONS=9.1 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
         osx_image: xcode10
-        env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64
+        env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
         osx_image: xcode10
-        env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_BOOST_PYTHON_VERSION=3.7 CONAN_ARCHS=x86_64 PYENV_VERSION=3.7
+        env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
 
 install:
   - chmod +x .travis/install.sh
