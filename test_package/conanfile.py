@@ -11,8 +11,6 @@ class TestPackageConan(ConanFile):
     generators = "cmake"
 
     def build(self):
-        #testing removal of static lib so that cmake will find dynamic lib on travis
-        os.unlink("/opt/pyenv/versions/3.6.7/lib/libpython3.6m.a")
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
