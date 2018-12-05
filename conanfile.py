@@ -18,6 +18,7 @@ class BoostPythonConan(base.BoostBaseConan):
     source_only_deps = [
         "graph",
         "integer",
+        "parameter",
         "property_map"
     ]
     b2_requires = [
