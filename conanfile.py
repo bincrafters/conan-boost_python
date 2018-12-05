@@ -18,8 +18,11 @@ class BoostPythonConan(base.BoostBaseConan):
     source_only_deps = [
         "graph",
         "integer",
+        "multi_index",
         "parameter",
-        "property_map"
+        "property_map",
+        "serialization",
+        "unordered"
     ]
     b2_requires = [
         "boost_bind",
