@@ -4,21 +4,17 @@
 from conans import python_requires
 
 
-base = python_requires("boost_base/1.67.0@bincrafters/testing")
+base = python_requires("boost_base/1.68.0@bincrafters/testing")
 
 class BoostPythonConan(base.BoostBaseConan):
     name = "boost_python"
     url = "https://github.com/bincrafters/conan-boost_python"
     lib_short_names = ["python"]
     options = {
-        "shared": [True, False],
-        "python_version": [
-            None,
-            '2.2', '2.3', '2.4', '2.5', '2.6', '2.7',
-            '3.0', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9'
-            ]}
+        "python_version": [None, '2.2', '2.3', '2.4', '2.5', '2.6', '2.7', '3.0', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9'],
+        "shared": [True, False]
+    }
     default_options = "shared=False"
-
     source_only_deps = [
         "graph",
         "integer",
@@ -45,24 +41,22 @@ class BoostPythonConan(base.BoostBaseConan):
         "boost_static_assert",
         "boost_tuple",
         "boost_type_traits",
-        "boost_utility",
+        "boost_utility"
     ]
-    
+
     def requirements_additional(self):
         self.requires("python_dev_config/0.5@bincrafters/stable")
 
-    def source_additional(self):
+    def config_options_additional(self):
         if 'python_version' in self.options:
             if self.options.python_version and self.options.python_version != self.deps_user_info['python_dev_config'].python_version:
                 raise Exception("Python version does not match with configured python dev, expected %s but got %s." % (self.options.python_version, self.deps_user_info['python_dev_config'].python_version))
-            
+
     def package_info_additional(self):
         if self.options.shared:
             self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
-            
+
     def package_id_additional(self):
         self.info.options.python_version = "python-" + str(self.options.python_version)
-            
-

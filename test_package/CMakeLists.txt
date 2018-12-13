@@ -1,11 +1,13 @@
 project(test_package CXX)
 cmake_minimum_required(VERSION 3.1.2)
 
+
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
+find_package(Python3 COMPONENTS Interpreter Development Compiler)
 find_package(MPI)
 
 file(GLOB SOURCE_FILES *.cpp)
