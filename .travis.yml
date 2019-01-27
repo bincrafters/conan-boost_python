@@ -39,8 +39,7 @@ matrix:
         python: 3.6
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=6.0 CONAN_ARCHS=x86_64 CONAN_DOCKER_IMAGE=conanio/clang60 CONAN_OPTIONS=boost_python:python_version=3.6
-        python: 3.6
-      - <<: *osx
+        - <<: *osx
         osx_image: xcode8.3
         env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
       - <<: *osx
@@ -66,9 +65,9 @@ matrix:
         env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2 CONAN_ARCHS=x86_64 PYENV_VERSION=3.6 CONAN_OPTIONS=boost_python:python_version=3.6
 
 install:
-  - chmod +x .travis/install.sh
-  - ./.travis/install.sh
+  - chmod +x .ci/install.sh
+  - ./.ci/install.sh
 
 script:
-  - chmod +x .travis/run.sh
-  - ./.travis/run.sh
+  - chmod +x .ci/run.sh
+  - ./.ci/run.sh
