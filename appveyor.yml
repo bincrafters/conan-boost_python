@@ -1,9 +1,7 @@
 build: false
 
 environment:
-    PYTHON: "C:\\Python27"
-    PYTHON_VERSION: "2.7.8"
-    PYTHON_ARCH: "32"
+    PYTHON: "C:\\Python36"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -14,7 +12,7 @@ environment:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
@@ -24,7 +22,7 @@ environment:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
@@ -34,41 +32,41 @@ environment:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86
           CONAN_PYTHON_PATH: C:/Python36/python.exe
-          CONAN_BOOST_PYTHON_VERSION: 3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python27-x64/python.exe
+          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
           CONAN_OPTIONS: boost_python:python_version=3.6
 
 install:
-  - set PATH=%PATH%;%PYTHON%/Scripts/
+  - set PATH=%PYTHON%;%PYTHON%/Scripts/;%PATH%
   - pip.exe install conan --upgrade
   - pip.exe install conan_package_tools bincrafters_package_tools
   - conan user # It creates the conan data directory
