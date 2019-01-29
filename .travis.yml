@@ -70,5 +70,5 @@ install:
   - ./.ci/install.sh
 
 script:
-  - chmod +x .ci/run.sh.sh
-  - ./.ci/run.sh.sh
+  - chmod +x .ci/run.sh
+  - ./.ci/run.sh
