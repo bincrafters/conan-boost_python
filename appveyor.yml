@@ -7,65 +7,51 @@ environment:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python36/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
-          PYTHON_ARCH: 32
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
-          PYTHON_ARCH: 64
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36-x64/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python36/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36-x64/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python36/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36-x64/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python36/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 12
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36-x64/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           CONAN_VISUAL_VERSIONS: 14
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36-x64/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36/python.exe
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_ARCHS: x86_64
-          CONAN_PYTHON_PATH: C:/Python36-x64/python.exe
-          CONAN_OPTIONS: boost_python:python_version=3.6
+          CONAN_OPTIONS: boost_python:python_version=3.6;python_dev_config=C:/Python36-x64/python.exe
 
 install:
   - set PATH=%PYTHON%;%PYTHON%/Scripts/;%PATH%
