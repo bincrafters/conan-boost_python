@@ -46,7 +46,7 @@ class BoostPythonConan(base.BoostBaseConan):
     ]
 
     def requirements_additional(self):
-        self.requires("python_dev_config/0.5@bincrafters/stable")
+        self.requires("python_dev_config/0.6@bincrafters/stable")
 
     def config_options_additional(self):
         if 'python_version' in self.options:
