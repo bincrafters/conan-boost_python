@@ -9,6 +9,7 @@ import os
 class TestPackageConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
+    requires = ["python_dev_config/0.6@bincrafters/stable"]
 
     def build(self):
         cmake = CMake(self)
