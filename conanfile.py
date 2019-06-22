@@ -32,8 +32,10 @@ class BoostPythonConan(base.BoostBaseConan):
         super(BoostPythonConan, self).package_info()
         if self.options.shared:
             self.cpp_info.defines.append('BOOST_PYTHON_DYNAMIC_LIB')
+            self.cpp_info.defines.append('BOOST_NUMPY_DYNAMIC_LIB')
         else:
             self.cpp_info.defines.append('BOOST_PYTHON_STATIC_LIB')
+            self.cpp_info.defines.append('BOOST_NUMPY_STATIC_LIB')
 
     def package_id(self):
         super(BoostPythonConan, self).package_id()
